@@ -1,0 +1,12 @@
+<svg>
+  <gradientRect x="0" y="0" width="100%" height="100%"
+  gradient-type="radial"
+  gradient-x1="50%" gradient-y1="50%"
+  gradient-x2="50%+150" gradient-y2="50%+150"
+  gradient-color1="gray"
+  gradient-color2="black" />
+    <text x="50%" y="35%" id="bar-label" class="sensor-label">Barometer</text>
+    <text id="bar-data" class="sensor-data">{ ... }</text>
+    <!--<text id="gps-label" class="sensor-label">gps (latitude/longitude/altitude)</text>-->
+    <!--<text id="gps-data" class="sensor-data">{ ... }</text>-->
+</svg>
