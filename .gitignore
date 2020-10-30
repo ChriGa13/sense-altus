@@ -1,3 +1,6 @@
+# Fitbit build
+build/
+
 # Logs
 logs
 *.log
