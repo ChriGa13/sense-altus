@@ -7,6 +7,10 @@
   gradient-color2="black" />
     <text x="50%" y="35%" id="bar-label" class="sensor-label">Barometer</text>
     <text id="bar-data" class="sensor-data">{ ... }</text>
-    <!--<text id="gps-label" class="sensor-label">gps (latitude/longitude/altitude)</text>-->
-    <!--<text id="gps-data" class="sensor-data">{ ... }</text>-->
+    <text id="gps-label" class="sensor-label">GPS</text>
+    <text id="gps-data" class="sensor-data">{ ... }</text>
+
+    <use id="reconnect-gps-button" href="#text-button" class="text-button bottom application-fill">
+      <set href="#text" attributeName="text-buffer" to="Reconnect GPS" />
+    </use>
 </svg>
