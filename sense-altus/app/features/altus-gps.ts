@@ -8,7 +8,7 @@ export class AltusGPS {
 
     private gpsWatchId: number = 0;
 
-    private readonly gpsTimeout = 100_000;
+    private readonly gpsTimeout = 60_000;
     
     constructor(gpsLabel: HTMLElement, gpsData: HTMLElement) {
         this.gpsLabel = gpsLabel;
@@ -27,17 +27,15 @@ export class AltusGPS {
     private locationSuccessCallback(position: Position): void {
         const gpsData = document.getElementById('gps-data') as HTMLElement;
         
-        gpsData.text = JSON.stringify({
-            altitude: position.coords.altitude + 'm',
-            accuracy: position.coords.altitudeAccuracy + '%'
-        });
+        gpsData.text = position.coords.altitude + 'm';
     }
   
-    private locationErrorCallback(error: PositionError): void {   
-        this.showReconnectButton();
-
+    private locationErrorCallback(error: PositionError): void {
         const gpsData = document.getElementById('gps-data') as HTMLElement;
         gpsData.text = 'Error while connecting';
+
+        const reconnectGPSButton = document.getElementById('reconnect-gps-button') as HTMLElement;
+        reconnectGPSButton.style.display = 'inline';
     }
 
     private showReconnectButton(show: boolean = true): void {
