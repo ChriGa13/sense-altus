@@ -1,21 +1,17 @@
-function mySettings(props) {
+function Colors(props) {
   return (
     <Page>
       <Section
-        title={<Text bold align="center">Demo Settings</Text>}>
-        <Toggle
-          settingsKey="toggle"
-          label="Toggle Switch"
-        />
+        title={<Text bold align="center">Color Settings</Text>}>
         <ColorSelect
-          settingsKey="color"
+          settingsKey="myColor"
           colors={[
-            {color: "tomato"},
-            {color: "sandybrown"},
-            {color: "#FFD700"},
-            {color: "#ADFF2F"},
-            {color: "deepskyblue"},
-            {color: "plum"}
+            {color: 'tomato'},
+            {color: 'sandybrown'},
+            {color: 'gold'},
+            {color: 'aquamarine'},
+            {color: 'deepskyblue'},
+            {color: 'plum'}
           ]}
         />
       </Section>
@@ -23,4 +19,4 @@ function mySettings(props) {
   );
 }
 
-registerSettingsPage(mySettings);
+registerSettingsPage(Colors);
