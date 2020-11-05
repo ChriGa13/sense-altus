@@ -3,8 +3,10 @@ import { me as device } from 'device';
 import * as fs from 'fs';
 import * as messaging from 'messaging';
 
+import { environment as env } from './environment';
+
 export interface SenseAltusSettings {
-    textColor?: string;
+    color?: string;
 }
 
 export interface OnSettingsChangeCallback {
@@ -22,7 +24,7 @@ export class SettingsService {
 
     constructor(callback: OnSettingsChangeCallback) {
         this.settings = this.loadSettings();
-        console.log('loading: ' + this.settings);
+
         this.onSettingsChange = callback;
         this.onSettingsChange(this.settings);
     }
@@ -31,15 +33,13 @@ export class SettingsService {
         // Received message containing settings data
         messaging.peerSocket.addEventListener('message', (event) => {
             const messageEvent = event as MessageEvent;
-            if (messageEvent && messageEvent.data && messageEvent.data.key === 'myColor') {
-                console.log('oncolorchange');
+            if (messageEvent && messageEvent.data && messageEvent.data.key === env.settingsKeys.color) {
                 if(this.settings == null) {
                     this.settings = {
-                        textColor: undefined
+                        color: undefined
                     };
                 }
-                this.settings.textColor = messageEvent.data.value;
-                console.log('settings changed: ' +  this.settings);
+                this.settings.color = messageEvent.data.value;
                 this.onSettingsChange(this.settings);
             }
         });
@@ -52,18 +52,17 @@ export class SettingsService {
     private loadSettings(): SenseAltusSettings {
         try {
             return fs.readFileSync(this.SETTINGS_FILE, this.SETTINGS_TYPE) as SenseAltusSettings;
-        } catch (ex) {
+        } catch (error) {
             return {} as SenseAltusSettings;
         }
     }
 
     // Save settings to the filesystem
     private saveSettings(file: string, type: Encoding, settings: SenseAltusSettings): void {
-        console.log('saving: ' + file + ' ' + type);
         try {
             fs.writeFileSync(file, settings, type);
-        } catch(error) {
-            console.log('save error: ' + error);
+        } catch (error) {
+            console.log('Error while saving settings: ' + error);
         }
     }
 }

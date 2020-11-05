@@ -7,17 +7,17 @@
   fill: white;
   text-anchor: middle;
   text-length: 32;
-  font-size: 20;
+  font-size: 30;
   x: 50%;
   y: $+5;
 }
 
 .sensor-data {
   font-family: System-Light;
-  fill: yellow;
+  fill: white;
   text-anchor: middle;
   text-length: 64;
-  font-size: 20;
+  font-size: 35;
   x: 50%;
   y: $;
 }

@@ -4,7 +4,7 @@ function Colors(props) {
       <Section
         title={<Text bold align="center">Color Settings</Text>}>
         <ColorSelect
-          settingsKey="myColor"
+          settingsKey="color"
           colors={[
             {color: 'tomato'},
             {color: 'sandybrown'},

@@ -1,9 +1,6 @@
 /*** UI Imports ***/
 import document from 'document';
 
-/*** General Imports ***/
-import * as messaging from 'messaging';
-
 /*** Sensor Imports ***/
 import { AltusBarometer } from './features/altus-barometer';
 import { AltusGPS } from './features/altus-gps';
@@ -22,25 +19,19 @@ const barData = document.getElementById('bar-data');
 const gpsLabel = document.getElementById('gps-label');
 const gpsData = document.getElementById('gps-data');
 
-/*** Settings Script ***/
+const reconnectGPSButton = document.getElementById('reconnect-gps-button');
 
+/*** Settings Script ***/
 const settingsCallback = function (settings: SenseAltusSettings): void {
-  if(settings?.textColor) {
-    (barData as HTMLElement).style.fill = settings.textColor;
-    (gpsData as HTMLElement).style.fill = settings.textColor;
+  if(settings?.color) {
+    (barData as HTMLElement).style.fill = settings.color;
+    (gpsData as HTMLElement).style.fill = settings.color;
+    (reconnectGPSButton as HTMLElement).style.fill = settings.color;
   }
 };
 
 const settingsService = new SettingsService(settingsCallback);
 settingsService.initialize();
-
-// messaging.peerSocket.addEventListener("message", (event) => {
-//   const messageEvent = event as MessageEvent;
-//   if (messageEvent && messageEvent.data && messageEvent.data.key === "myColor") {
-//     (barData as HTMLElement).style.fill = messageEvent.data.value;
-//     (gpsData as HTMLElement).style.fill = messageEvent.data.value;
-//   }
-// });
 
 /*** Barometer Script ***/
 const barometer: AltusBarometer = 

@@ -27,7 +27,7 @@ export class AltusBarometer {
               
                 // math magic: https://de.wikipedia.org/wiki/Barometrische_H%C3%B6henformel
                 if(this.sensor.barometer?.pressure) {
-                  this.height = Math.round((288.15 / 0.0065) * (1 - (Math.pow((this.sensor.barometer.pressure / (1013.25 * 100)), (1/ 5.255)))));
+                  this.height = Math.round((288.15 / 0.0065) * (1 - (Math.pow(((this.sensor.barometer.pressure / 100) / 1013.25), (1/ 5.255)))));
                   this.barData.text = this.height + 'm';
                 }
           

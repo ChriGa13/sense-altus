@@ -25,17 +25,12 @@ export class AltusGPS {
     }
 
     private locationSuccessCallback(position: Position): void {
-        const gpsData = document.getElementById('gps-data') as HTMLElement;
-        
-        gpsData.text = position.coords.altitude + 'm';
+        this.gpsData.text = position.coords.altitude + 'm';
     }
   
     private locationErrorCallback(error: PositionError): void {
-        const gpsData = document.getElementById('gps-data') as HTMLElement;
-        gpsData.text = 'Error while connecting';
-
-        const reconnectGPSButton = document.getElementById('reconnect-gps-button') as HTMLElement;
-        reconnectGPSButton.style.display = 'inline';
+        this.gpsData.text = 'Error while connecting';
+        this.showReconnectButton();
     }
 
     private showReconnectButton(show: boolean = true): void {
@@ -47,8 +42,8 @@ export class AltusGPS {
         this.showReconnectButton(false);
 
         this.gpsWatchId = geolocation.watchPosition(
-            this.locationSuccessCallback, 
-            this.locationErrorCallback, 
+            (position: Position) => { this.locationSuccessCallback(position); }, 
+            (error: PositionError) => { this.locationErrorCallback(error); }, 
             { timeout: this.gpsTimeout });
             
         this.gpsData.text = 'Connecting ...';

@@ -5,9 +5,9 @@
   gradient-x2="50%+150" gradient-y2="50%+150"
   gradient-color1="gray"
   gradient-color2="black" />
-    <text x="50%" y="35%" id="bar-label" class="sensor-label">Barometer</text>
+    <text x="50%" y="20%" id="bar-label" class="sensor-label">Barometer</text>
     <text id="bar-data" class="sensor-data">{ ... }</text>
-    <text id="gps-label" class="sensor-label">GPS</text>
+    <text y="$+5" id="gps-label" class="sensor-label">GPS</text>
     <text id="gps-data" class="sensor-data">{ ... }</text>
 
     <use id="reconnect-gps-button" href="#text-button" class="text-button bottom application-fill">
