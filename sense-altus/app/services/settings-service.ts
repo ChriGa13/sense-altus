@@ -7,6 +7,8 @@ import { environment as env } from './environment';
 
 export interface SenseAltusSettings {
     color?: string;
+    isTemperatureEnabled?: boolean;
+    temperature?: number;
 }
 
 export interface OnSettingsChangeCallback {
@@ -33,13 +35,20 @@ export class SettingsService {
         // Received message containing settings data
         messaging.peerSocket.addEventListener('message', (event) => {
             const messageEvent = event as MessageEvent;
-            if (messageEvent && messageEvent.data && messageEvent.data.key === env.settingsKeys.color) {
+            if (messageEvent && messageEvent.data) {
                 if(this.settings == null) {
                     this.settings = {
-                        color: undefined
+                        color: undefined,
+                        isTemperatureEnabled: false,
+                        temperature: 0
                     };
                 }
-                this.settings.color = messageEvent.data.value;
+                switch(messageEvent.data.key) {
+                    case 'color': this.settings.color = messageEvent.data.value;
+                    case 'isTemperatureEnabled': this.settings.isTemperatureEnabled = messageEvent.data.value;
+                    case 'temperature': this.settings.temperature = messageEvent.data.value;
+                }
+
                 this.onSettingsChange(this.settings);
             }
         });
@@ -65,4 +74,6 @@ export class SettingsService {
             console.log('Error while saving settings: ' + error);
         }
     }
+
+    public getCurrentSettings(): SenseAltusSettings { return this.settings; }
 }

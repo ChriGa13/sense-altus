@@ -36,6 +36,7 @@ settingsService.initialize();
 /*** Barometer Script ***/
 const barometer: AltusBarometer = 
   new AltusBarometer(
+    settingsService,
     (barLabel as HTMLElement), 
     (barData as HTMLElement)
   );
